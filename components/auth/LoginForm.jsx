@@ -24,7 +24,8 @@ const LoginForm = () => {
         setError("")
         setEmail("")
         setPassword("")
-        router.push("/login");
+        router.push("/");
+        return 
       } else {
         setError("Please provide a valid email ,  password");
       }
@@ -47,6 +48,7 @@ const LoginForm = () => {
             type="email"
             name="email"
             id="email"
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -57,6 +59,7 @@ const LoginForm = () => {
           <input
             type="password"
             name="password"
+            required
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

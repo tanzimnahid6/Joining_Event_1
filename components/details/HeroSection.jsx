@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import ActionButtons from '../ActionButtons';
+import Image from "next/image";
+import ActionButtons from "../ActionButtons";
 
-const HeroSection = ({eventInfo}) => {
+const HeroSection = ({ eventInfo }) => {
   return (
     <section className="container">
       <div className="bg-gradient-to-b from-slate-200/20 to-slate-800/30">
@@ -10,9 +10,9 @@ const HeroSection = ({eventInfo}) => {
           alt="Event 1"
           className="h-[450px] mx-auto"
           width={900}
-          height={900} />
+          height={900}
+        />
       </div>
-
 
       <div className="flex items-end">
         <div className="flex-auto py-4">
@@ -20,15 +20,19 @@ const HeroSection = ({eventInfo}) => {
           <p className="text-[#9C9C9C] text-base mt-1">{eventInfo?.location}</p>
           <div className="text-[#737373] text-sm mt-1">
             <span>{eventInfo.interested_ids?.length}k Interested</span>
-            <span className='mx-2'>|</span>
+            <span className="mx-2">|</span>
             <span>{eventInfo.going_ids?.length}K Going</span>
           </div>
         </div>
 
-        <ActionButtons fromDetails={true}/>
+        <ActionButtons
+          eventId={eventInfo?.id}
+          interestedIds={eventInfo?.interested_ids}
+          fromDetails={true}
+        />
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default HeroSection
+export default HeroSection;
