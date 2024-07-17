@@ -6,8 +6,15 @@ import { EventModel } from "./model/eventModel";
 import { UserModel } from "./model/usersModel";
 import mongoose from "mongoose";
 
-export const getAllEvents = async () => {
-  const allEvents = await EventModel.find().lean(); // .lean use to remove extra metadata information
+export const getAllEvents = async (query) => {
+  let allEvents = [];
+  if (query) {
+    const regex = new RegExp(query, "i");
+    allEvents = await EventModel.find({ name: { $regex: regex } }).lean();
+  } else {
+    allEvents = await EventModel.find().lean();
+  }
+  // .lean use to remove extra metadata information
   return replaceMongoIdInArray(allEvents); //replaceMongoIdInArray(Arr) this function use for change id
 };
 
@@ -41,4 +48,9 @@ export const updateInterest = async (eventId, userId) => {
     }
     event.save();
   }
+};
+export const updateGoing = async (eventId, userId) => {
+  const event = await EventModel.findById(eventId);
+  event.going_ids.push(new mongoose.Types.ObjectId(userId));
+  event.save();
 };
